@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(totalLable));
             this.storeLable = new System.Windows.Forms.Label();
             this.item1Lable = new System.Windows.Forms.Label();
             this.item2Lable = new System.Windows.Forms.Label();
@@ -56,6 +57,8 @@
             this.receiptTitle = new System.Windows.Forms.Label();
             this.receiptLeftColumn = new System.Windows.Forms.Label();
             this.receiptRightCollumn = new System.Windows.Forms.Label();
+            this.newOrderButton = new System.Windows.Forms.Button();
+            this.receiptFooter = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // storeLable
@@ -295,7 +298,7 @@
             // 
             this.receiptTitle.BackColor = System.Drawing.SystemColors.HighlightText;
             this.receiptTitle.Font = new System.Drawing.Font("Courier New", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.receiptTitle.Location = new System.Drawing.Point(235, 90);
+            this.receiptTitle.Location = new System.Drawing.Point(239, 90);
             this.receiptTitle.Name = "receiptTitle";
             this.receiptTitle.Size = new System.Drawing.Size(320, 36);
             this.receiptTitle.TabIndex = 26;
@@ -305,7 +308,7 @@
             // 
             this.receiptLeftColumn.BackColor = System.Drawing.SystemColors.HighlightText;
             this.receiptLeftColumn.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.receiptLeftColumn.Location = new System.Drawing.Point(235, 126);
+            this.receiptLeftColumn.Location = new System.Drawing.Point(239, 126);
             this.receiptLeftColumn.Name = "receiptLeftColumn";
             this.receiptLeftColumn.Size = new System.Drawing.Size(159, 368);
             this.receiptLeftColumn.TabIndex = 27;
@@ -314,17 +317,40 @@
             // 
             this.receiptRightCollumn.BackColor = System.Drawing.SystemColors.HighlightText;
             this.receiptRightCollumn.Font = new System.Drawing.Font("Courier New", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.receiptRightCollumn.Location = new System.Drawing.Point(390, 126);
+            this.receiptRightCollumn.Location = new System.Drawing.Point(394, 126);
             this.receiptRightCollumn.Name = "receiptRightCollumn";
             this.receiptRightCollumn.Size = new System.Drawing.Size(165, 368);
             this.receiptRightCollumn.TabIndex = 28;
             this.receiptRightCollumn.TextAlign = System.Drawing.ContentAlignment.TopRight;
             // 
+            // newOrderButton
+            // 
+            this.newOrderButton.Enabled = false;
+            this.newOrderButton.Location = new System.Drawing.Point(329, 501);
+            this.newOrderButton.Name = "newOrderButton";
+            this.newOrderButton.Size = new System.Drawing.Size(165, 22);
+            this.newOrderButton.TabIndex = 29;
+            this.newOrderButton.Text = "New Order";
+            this.newOrderButton.UseVisualStyleBackColor = true;
+            this.newOrderButton.Click += new System.EventHandler(this.newOrderButton_Click);
+            // 
+            // receiptFooter
+            // 
+            this.receiptFooter.BackColor = System.Drawing.SystemColors.HighlightText;
+            this.receiptFooter.Font = new System.Drawing.Font("Courier New", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.receiptFooter.Location = new System.Drawing.Point(239, 443);
+            this.receiptFooter.Name = "receiptFooter";
+            this.receiptFooter.Size = new System.Drawing.Size(320, 51);
+            this.receiptFooter.TabIndex = 30;
+            this.receiptFooter.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
             // totalLable
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(617, 518);
+            this.ClientSize = new System.Drawing.Size(617, 535);
+            this.Controls.Add(this.receiptFooter);
+            this.Controls.Add(this.newOrderButton);
             this.Controls.Add(this.exactChangeButton);
             this.Controls.Add(this.printReceiptButton);
             this.Controls.Add(this.changeOutput);
@@ -353,8 +379,9 @@
             this.Controls.Add(this.receiptRightCollumn);
             this.Controls.Add(this.receiptLeftColumn);
             this.Controls.Add(this.receiptTitle);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "totalLable";
-            this.Text = "    ";
+            this.Text = "Store Store Cash Register";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -390,6 +417,8 @@
         private System.Windows.Forms.Label receiptTitle;
         private System.Windows.Forms.Label receiptLeftColumn;
         private System.Windows.Forms.Label receiptRightCollumn;
+        private System.Windows.Forms.Button newOrderButton;
+        private System.Windows.Forms.Label receiptFooter;
     }
 }
 
