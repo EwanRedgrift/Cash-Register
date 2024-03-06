@@ -16,7 +16,7 @@ namespace Cash_Register
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new totalLable());
+            Application.Run(new totalLabel());
         }
     }
 }

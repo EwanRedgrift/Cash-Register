@@ -10,24 +10,45 @@ using System.Windows.Forms;
 using System.Threading;
 using System.Media;
 
+
+
+/*
+ * 
+   ____    _    ____  _   _   ____  _____ ____ ___ ____ _____ _____ ____  
+  / ___|  / \  / ___|| | | | |  _ \| ____/ ___|_ _/ ___|_   _| ____|  _ \ 
+ | |     / _ \ \___ \| |_| | | |_) |  _|| |  _ | |\___ \ | | |  _| | |_) |
+ | |___ / ___ \ ___) |  _  | |  _ <| |__| |_| || | ___) || | | |___|  _ < 
+  \____/_/   \_\____/|_| |_| |_| \_\_____\____|___|____/ |_| |_____|_| \_\
+                                                                          
+    Ewan Redgrift
+    2024/03/06
+    Cash Register for Store Store
+ * 
+ */
+
 namespace Cash_Register
 {
 
-    public partial class totalLable : Form
+    public partial class totalLabel : Form
     {
        
 
-        double item1Price = 10.99;
-        double item2Price = 5.45;
-        double item3Price = 0.99;
+        double item1PriceApple = 10.99;
+        double item2PriceHuman = 5.45;
+        double item3PriceChair = 0.99;
 
-        int numItem1;
-        int numItem2;
-        int numItem3;
+        int numItem1Apple;
+        int numItem2Human;
+        int numItem3Chair;
+
+        double item1TotalApple;
+        double item2TotalHuman;
+        double item3TotalChair;
 
         bool easterEgg;
 
         double hst = 0.13;
+
 
         double subtotal;
         double taxAmmount;
@@ -46,84 +67,87 @@ namespace Cash_Register
 
         //Varibles
 
-        public totalLable()
+        public totalLabel()
         {
             InitializeComponent();
             this.Size = new Size(231, 574);
-            storeLable.Size = new Size(174, 49);
+            storeLabel.Size = new Size(174, 49);
 
             //Setting up sizes on start
         }
 
         private void calcTotalButton_Click(object sender, EventArgs e)
         {
-            if (item1Input.Text != "")
+            if (appleInput.Text != "")
             {
                 try
                 {
-                    numItem1 = Convert.ToInt16(item1Input.Text);
+                    numItem1Apple = Convert.ToInt16(appleInput.Text);
+                    item1TotalApple = numItem1Apple * item1PriceApple;
                 }
                 catch
                 {
-                    item1Input.Text = "INT";
+                    appleInput.Text = "INT";
                 }
             }
             else
             {
-                item1Input.Text = "N/A";
+                appleInput.Text = "N/A";
             }
 
-            if (item2Input.Text != "")
+            if (humanInput.Text != "")
             {
                 try
                 {
-                    numItem2 = Convert.ToInt16(item2Input.Text);
+                    numItem2Human = Convert.ToInt16(humanInput.Text);
+                    item2TotalHuman = numItem2Human * item2PriceHuman;
                 }
                 catch
                 {
-                    item2Input.Text = "INT";
+                    humanInput.Text = "INT";
                 }
             }
             else
             {
-                item2Input.Text = "N/A";
+                humanInput.Text = "N/A";
             }
 
-            if (item3Input.Text != "")
+            if (chairInput.Text != "")
             {
                 try
                 {
-                    numItem3 = Convert.ToInt16(item3Input.Text);
+                    numItem3Chair = Convert.ToInt16(chairInput.Text);
+                    item3TotalChair = numItem3Chair * item3PriceChair;
                 }
                 catch
                 {
-                    item3Input.Text = "INT";
+                    chairInput.Text = "INT";
                 }
             }
             else
             {
-                item3Input.Text = "N/A";
+                chairInput.Text = "N/A";
             }
 
             //Figuring out numbers of orders
 
-            if (numItem1 == 1 && numItem2 == 3 && numItem3 == 3)
+            if (numItem1Apple == 1 && numItem2Human == 3 && numItem3Chair == 3)
             {
                 easterEgg = true;
             }
 
             //Easter egg!
 
-            subtotal = item1Price * (double)numItem1 + item2Price * (double)numItem2 + item3Price * (double)numItem3;
+            subtotal = item1PriceApple * (double)numItem1Apple + item2PriceHuman * (double)numItem2Human + item3PriceChair * (double)numItem3Chair;
             taxAmmount = (subtotal * hst);
             taxTotal = taxAmmount + subtotal;
             total = taxAmmount;
 
             //Calculations
 
-            subTotalOutPut.Text = $"${subtotal}";
-            taxOutPut.Text = $"${taxAmmount}";
-            totalOutput.Text = $"${taxTotal}";
+            subTotalOutPut.Text = $"{subtotal.ToString("C")}";
+            taxOutPut.Text = $"{taxAmmount.ToString("C")}";
+            totalOutput.Text = $"{taxTotal.ToString("C")}";
 
             //Outputs
 
@@ -152,9 +176,9 @@ namespace Cash_Register
                 {
                     tipInput.Text = "INT";
                 }
-
-                tipOutput.Text = $"${taxTotal + tipAmmount} (+${tipAmmount})";
+                
                 total = taxTotal + tipAmmount;
+                tipOutput.Text = $"{total.ToString("C")} (+{tipAmmount.ToString("C")})";
             }
             else
             {
@@ -186,7 +210,8 @@ namespace Cash_Register
                 }
                 if (ammountTendered > total)
                 {
-                    changeOutput.Text = $"Change: ${ammountTendered - total}";
+                    change = ammountTendered - total;
+                    changeOutput.Text = $"Change: {change.ToString("C")}";
                     exactChange = false;
                     printReceiptButton.Enabled = true;
                     exactChangeButton.Enabled = false;
@@ -204,7 +229,7 @@ namespace Cash_Register
             //Makin' change
         }
 
-        private void button2_Click(object sender, EventArgs e) //
+        private void button2_Click(object sender, EventArgs e)
         {
             exactChange = true;
             changeOutput.Text = "No change";
@@ -223,7 +248,7 @@ namespace Cash_Register
 
             //Default delay time
 
-            storeLable.Size = new Size(538, 49);
+            storeLabel.Size = new Size(538, 49);
             this.Size = new Size(589, 574);
 
             //Changing size
@@ -237,30 +262,32 @@ namespace Cash_Register
             Thread.Sleep(250);
             this.Refresh();
 
-            if (numItem1 != 0)
+            printReceiptButton.Enabled = false;
+
+            if (numItem1Apple != 0)
             {
                 receiptLeftColumn.Text += $"\nItem #1:";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
-                receiptRightCollumn.Text += $"\nx{numItem1} (${numItem1 * item1Price})";
+                receiptRightCollumn.Text += $"\nx{numItem1Apple} ({item1TotalApple.ToString("C")})";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
             }
-            if (numItem2 != 0)
+            if (numItem2Human != 0)
             {
                 receiptLeftColumn.Text += $"\nItem #2:";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
-                receiptRightCollumn.Text += $"\nx{numItem2} (${numItem2 * item2Price})";
+                receiptRightCollumn.Text += $"\nx{numItem2Human} ({item2TotalHuman.ToString("C")})";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
             }
-            if (numItem3 != 0)
+            if (numItem3Chair != 0)
             {
                 receiptLeftColumn.Text += $"\nItem #3: ";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
-                receiptRightCollumn.Text += $"\nx{numItem3} (${numItem3 * item3Price})";
+                receiptRightCollumn.Text += $"\nx{numItem3Chair} ({item3TotalChair.ToString("C")})";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
             }
@@ -269,21 +296,21 @@ namespace Cash_Register
             receiptLeftColumn.Text += $"\n\nSubtotal: ";
             Thread.Sleep(delayAmmount);
             this.Refresh();
-            receiptRightCollumn.Text += $"\n\n${subtotal}";
+            receiptRightCollumn.Text += $"\n\n{subtotal.ToString("C")}";
             Thread.Sleep(delayAmmount);
             this.Refresh();
 
             receiptLeftColumn.Text += $"\nTax: ";
             Thread.Sleep(delayAmmount);
             this.Refresh();
-            receiptRightCollumn.Text += $"\n${taxAmmount}";
+            receiptRightCollumn.Text += $"\n{taxAmmount.ToString("C")}";
             Thread.Sleep(delayAmmount);
             this.Refresh();
 
             receiptLeftColumn.Text += $"\nTotal: ";
             Thread.Sleep(delayAmmount);
             this.Refresh();
-            receiptRightCollumn.Text += $"\n${taxTotal}";
+            receiptRightCollumn.Text += $"\n{taxTotal.ToString("C")}";
             Thread.Sleep(delayAmmount);
             this.Refresh();
 
@@ -299,14 +326,14 @@ namespace Cash_Register
                 receiptLeftColumn.Text += $"\nTip: ";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
-                receiptRightCollumn.Text += $"\n${tipAmmount}";
+                receiptRightCollumn.Text += $"\n{tipAmmount.ToString("C")}";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
 
                 receiptLeftColumn.Text += $"\nTotal: ";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
-                receiptRightCollumn.Text += $"\n${total}";
+                receiptRightCollumn.Text += $"\n{total.ToString("C")}";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
             }
@@ -325,14 +352,14 @@ namespace Cash_Register
                 receiptLeftColumn.Text += $"\n\nTendered: ";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
-                receiptRightCollumn.Text += $"\n\n${ammountTendered}";
+                receiptRightCollumn.Text += $"\n\n{ammountTendered.ToString("C")}";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
 
                 receiptLeftColumn.Text += $"\n\nChange: ";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
-                receiptRightCollumn.Text += $"\n\n${ammountTendered - total}";
+                receiptRightCollumn.Text += $"\n\n{change.ToString("C")}";
                 Thread.Sleep(delayAmmount);
                 this.Refresh();
             }
@@ -358,18 +385,34 @@ namespace Cash_Register
             newOrderButton.Enabled = false;
 
             this.Size = new Size(231, 574);
-            storeLable.Size = new Size(174, 49);
+            storeLabel.Size = new Size(174, 49);
 
-            item1Input.Text = "";
-            item2Input.Text = "";
-            item3Input.Text = "";
+            appleInput.Text = "";
+            humanInput.Text = "";
+            chairInput.Text = "";
 
             subTotalOutPut.Text = "";
             taxOutPut.Text = "";
             totalOutput.Text = "";
+            changeOutput.Text = "";
 
             tipInput.Text = "";
             amountTenderedInput.Text = "";
+
+            numItem1Apple = 0;
+            numItem2Human = 0;
+            numItem3Chair = 0;
+
+            item1TotalApple = 0;
+            item2TotalHuman = 0;
+            item3TotalChair = 0;
+
+            subtotal = 0;
+            taxAmmount = 0;
+            taxTotal = 0;
+            tip = 0;
+            tipAmmount = 0;
+            total = 0;
 
             calcChangeButton.Enabled = false;
             exactChangeButton.Enabled = false;
